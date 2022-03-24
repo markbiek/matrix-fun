@@ -1,4 +1,4 @@
-import { add, subtract, mult } from '../matrix';
+import { Matrix } from '../matrix';
 
 const a1x1 = [
 	[1],
@@ -33,7 +33,7 @@ describe('add', () => {
 			[10, 12]
 		];
 
-		expect(add(a2x2, b2x2)).toEqual(result);
+		expect(Matrix.add(a2x2, b2x2)).toEqual(result);
 	});
 
 	test('3x3 addition', () => {
@@ -44,7 +44,7 @@ describe('add', () => {
 			[23, 25, 27]
 		];
 
-		expect(add(a3x3, b3x3)).toEqual(result);
+		expect(Matrix.add(a3x3, b3x3)).toEqual(result);
 	});
 });
 
@@ -55,7 +55,7 @@ describe('subtract', () => {
 			[-4, -4]
 		];
 
-		expect(subtract(a2x2, b2x2)).toEqual(result);
+		expect(Matrix.subtract(a2x2, b2x2)).toEqual(result);
 	});
 });
 
@@ -66,7 +66,7 @@ describe('mult', () => {
 			[11]
 		];
 
-		expect(mult(a2x2, a1x1)).toEqual(result);
+		expect(Matrix.mult(a2x2, a1x1)).toEqual(result);
 	});
 
 	test('3x3 multiplication', () => {
@@ -76,6 +76,6 @@ describe('mult', () => {
 			[318, 342, 366]
 		];
 
-		expect(mult(a3x3, b3x3)).toEqual(result);
+		expect(Matrix.mult(a3x3, b3x3)).toEqual(result);
 	});
 });
