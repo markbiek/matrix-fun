@@ -1,10 +1,72 @@
+type RotationMatrix = Array<Array<number>>;
+
+interface Rotations {
+	counterclockwise90: RotationMatrix;
+	counterclockwise180: RotationMatrix;
+	counterclockwise270: RotationMatrix;
+}
+
+interface Constants {
+	rotations: Rotations;
+}
+
 interface Matrix {
 	add: Function;
 	subtract: Function;
 	mult: Function;
+	rotate: Function;
+	rotationMatrix: Function;
+}
+
+export const MatrixConstants: Constants = {
+	rotations: {
+		counterclockwise90: [
+			[0, -1],
+			[1, 0]
+		],
+		counterclockwise180: [
+			[-1, 0],
+			[0, -1]
+		],
+		counterclockwise270: [
+			[0, 1],
+			[-1, 0]
+		]
+	}
+};
+
+const radians = (degrees: number): number => {
+	return degrees * Math.PI / 180;
+}
+
+const rotCos = (rads: number): number => {
+	return Math.floor(Math.cos(rads));
+}
+
+const rotSin = (rads: number): number => {
+	return Math.floor(Math.sin(rads));
 }
 
 export const Matrix: Matrix = {
+	rotate: (x: number, y:number, degrees: number): number[] | null => {
+		const v = Matrix.mult(Matrix.rotationMatrix(degrees), [[x], [y]]);
+
+		return [v[0][0], v[1][0]];
+	},
+	rotationMatrix: (degrees: number): number[][] => {
+		const rads = radians(degrees);
+
+		const ret = [
+			[rotCos(rads), -1 * rotSin(rads)],
+			[rotSin(rads), rotCos(rads)]
+		];
+
+		if (ret[0][1] === -0) {
+			ret[0][1] = 0;
+		}
+
+		return ret;
+	},
 	/**
 	 * Add two matrices together. 
 	 *

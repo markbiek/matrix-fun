@@ -1,4 +1,4 @@
-import { Matrix } from '../matrix';
+import { Matrix, MatrixConstants } from '../matrix';
 
 const a1x1 = [
 	[1],
@@ -77,5 +77,14 @@ describe('mult', () => {
 		];
 
 		expect(Matrix.mult(a3x3, b3x3)).toEqual(result);
+	});
+});
+
+describe('rotationMatrix', () => {
+	test('90 rotation', () => {
+		expect(Matrix.rotationMatrix(90)).toEqual(MatrixConstants.rotations.counterclockwise90);
+	});
+	test('180 rotation', () => {
+		expect(Matrix.rotationMatrix(180)).toEqual(MatrixConstants.rotations.counterclockwise180);
 	});
 });
