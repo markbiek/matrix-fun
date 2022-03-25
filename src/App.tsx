@@ -23,16 +23,23 @@ const grid = (width: number, height: number, funcs: any) => {
 }
 
 const draw = (context: any, width: number, height: number, funcs: any) => {
-	const { px, ln } = funcs;
+	const { px } = funcs;
 	context.fillStyle = '#fff';
 	context.fillRect(0, 0, context.canvas.width, context.canvas.height);
 
 	grid(width, height, funcs);
 
-	px(10, 20);
+	let tries = 3;
+	let deg = 90;
+	let x = 100;
+	let y = 15;
 
-	const [x, y]= Matrix.rotate(10, 20, 180);
 	px(x, y);
+
+	for (let i = 0; i < tries; i++) {
+		[x, y] = Matrix.rotate(x, y, deg);
+		px(x, y);
+	}
 }
 
 function App() {
