@@ -3,7 +3,6 @@ import Canvas, {grid} from './Canvas';
 
 import './App.css';
 
-
 const draw = (context: any, width: number, height: number, funcs: any) => {
 	const { px } = funcs;
 	context.fillStyle = '#fff';
@@ -11,17 +10,26 @@ const draw = (context: any, width: number, height: number, funcs: any) => {
 
 	grid(width, height, funcs);
 
-	let tries = 3;
+	let tries = 11;
+	let i = 0;
 	let deg = 90;
 	let x = 100;
 	let y = 15;
 
 	px(x, y);
 
-	for (let i = 0; i < tries; i++) {
+	const interval = setInterval(() => {
+		if (i > tries) {
+			clearInterval(interval);
+			return;
+		}
+
+		px(x, y, '#fff');
+
 		[x, y] = Matrix.rotate(x, y, deg);
 		px(x, y);
-	}
+		i++;
+	}, 1000)
 }
 
 function App() {

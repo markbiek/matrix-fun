@@ -71,7 +71,7 @@ const Canvas = (props: CanvasProps) => {
 		context.strokeStyle = prevStrokeStyle;
 	}
 
-	const px = (x: number, y: number): void => {
+	const px = (x: number, y: number, color: string): void => {
 		if (!context) {
 			return;
 		}
@@ -85,7 +85,11 @@ const Canvas = (props: CanvasProps) => {
 
 		const prevFillStyle = context.fillStyle;
 
-		context.fillStyle = '#000';
+		if (!color) {
+			color = '#000';
+		}
+
+		context.fillStyle = color;
 		context.fillRect(x, y, 3, 3);
 		context.fillStyle = prevFillStyle;
 	};
