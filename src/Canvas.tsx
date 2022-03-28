@@ -71,6 +71,14 @@ const Canvas = (props: CanvasProps) => {
 		context.strokeStyle = prevStrokeStyle;
 	}
 
+	// x,y is the top right of the box
+	const box = (x: number, y: number, color: string): void => {
+		ln(x, y, x, y - 10, color);
+		ln(x, y, x - 10, y, color);
+		ln(x - 10, y, x - 10, y - 10, color);
+		ln(x - 10, y - 10, x, y - 10, color);
+	}
+
 	const px = (x: number, y: number, color: string): void => {
 		if (!context) {
 			return;
@@ -107,7 +115,8 @@ const Canvas = (props: CanvasProps) => {
 		if (props.onDraw) {
 			props.onDraw(context, props.width, props.height, {
 				px,
-				ln
+				ln,
+				box
 			} );
 		}
 	}, [canvasRef]);

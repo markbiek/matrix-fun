@@ -4,7 +4,7 @@ import Canvas, {grid} from './Canvas';
 import './App.css';
 
 const draw = (context: any, width: number, height: number, funcs: any) => {
-	const { px } = funcs;
+	const { px, box } = funcs;
 	context.fillStyle = '#fff';
 	context.fillRect(0, 0, context.canvas.width, context.canvas.height);
 
@@ -16,7 +16,7 @@ const draw = (context: any, width: number, height: number, funcs: any) => {
 	let x = 100;
 	let y = 15;
 
-	px(x, y);
+	box(x, y, '#000');
 
 	const interval = setInterval(() => {
 		if (i > tries) {
@@ -24,10 +24,10 @@ const draw = (context: any, width: number, height: number, funcs: any) => {
 			return;
 		}
 
-		px(x, y, '#fff');
+		box(x, y, '#fff');
 
 		[x, y] = Matrix.rotate(x, y, deg);
-		px(x, y);
+		box(x, y, '#000');
 		i++;
 	}, 1000)
 }
